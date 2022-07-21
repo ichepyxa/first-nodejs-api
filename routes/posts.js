@@ -1,15 +1,9 @@
-import {
-	getAllPosts,
-	getPost,
-	createPost,
-	updatePost,
-	deletePost,
-} from '../services/posts.js'
+import Posts from '../controllers/posts.js'
 
 export default app => {
-	app.get('/posts', getAllPosts)
-	app.get('/posts/:id', getPost)
-	app.post('/posts', createPost)
-	app.put('/posts/:id', updatePost)
-	app.delete('/posts/:id', deletePost)
+	app.get('/posts', Posts.getAllPosts)
+	app.get('/posts/:id', Posts.getPost)
+	app.post('/posts', Posts.createPost)
+	app.put('/posts/:id', Posts.updatePost)
+	app.delete('/posts/:id', Posts.deletePost)
 }

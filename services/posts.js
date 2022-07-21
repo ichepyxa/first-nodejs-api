@@ -1,50 +1,44 @@
 import Posts from '../models/posts.js'
 
-const getAllPosts = async (req, res) => {
-	try {
+class PostsService {
+	async getAllPosts() {
 		const posts = await Posts.find()
-		res.json(posts)
-	} catch (error) {
-		res.json(error)
+		return posts
 	}
-}
 
-const getPost = async (req, res) => {
-	try {
-		const post = await Posts.findById(req.params.id)
-		res.json(post)
-	} catch (error) {
-		res.json(error)
+	async getPost(id) {
+		if (!id) {
+			throw new Error('ID не указан')
+		}
+
+		const post = await Posts.findById(id)
+		return post
 	}
-}
 
-const createPost = async (req, res) => {
-	try {
-		const newPost = await Posts.create(req.body)
-		res.json(newPost)
-	} catch (error) {
-		res.json(error)
+	async createPost(post) {
+			const newPost = await Posts.create(post)
+			return newPost
 	}
-}
 
-const updatePost = async (req, res) => {
-	try {
-		const newPost = await Posts.findByIdAndUpdate(req.params.id, req.body, {
+	async updatePost(id, post) {
+		if (!id) {
+			throw new Error('ID не указан')
+		}
+
+		const newPost = await Posts.findByIdAndUpdate(id, post, {
 			new: true,
 		})
-		res.json(newPost)
-	} catch (error) {
-		res.json(error)
+		return newPost
+	}
+
+	async deletePost(id) {
+		if (!id) {
+			throw new Error('ID не указан')
+		}
+
+		const post = await Posts.findByIdAndDelete(id)
+		return post
 	}
 }
 
-const deletePost = async (req, res) => {
-	try {
-		const post = await Posts.findByIdAndDelete(req.params.id)
-		res.json(post)
-	} catch (error) {
-		res.json(error)
-	}
-}
-
-export { getAllPosts, getPost, createPost, updatePost, deletePost }
+export default new PostsService()
