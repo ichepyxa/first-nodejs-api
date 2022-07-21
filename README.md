@@ -1,6 +1,6 @@
 # first-nodejs-api
 
-First Node.js and Express API
+First Node.js and Express API.
 In the project directory, you can run:
 
 ### `npm install`
